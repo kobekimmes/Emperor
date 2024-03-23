@@ -6,10 +6,14 @@ class Rook extends Piece {
         row = _row;
         col = _col;
         isBlack = _isBlack;
+        chessBoard = _b;
     }
 
 
     public boolean isMoveLegal(int rowDest, int colDest) {
+        if (chessBoard.verifySourceAndDestination(row, col, rowDest, colDest, isBlack)) {
+            return chessBoard.verifyHorizontal(row, col, rowDest, colDest) || chessBoard.verifyVertical(row, col, rowDest, colDest);
+        }
         return false;
     }
 }

@@ -16,5 +16,16 @@ abstract class Piece {
         return this.isBlack;
     }
 
+    boolean movePiece(int endRow, int endCol) {
+        if (this.isMoveLegal(endRow, endCol)) {
+            this.chessBoard.removePiece(this.row, this.col);
+            this.setPos(endRow, endCol);
+            this.chessBoard.setPiece(endRow, endCol, this);
+            return true;
+        }
+        return false;
+    }
+
+
 
 }

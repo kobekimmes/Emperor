@@ -11,6 +11,9 @@ class Bishop extends Piece {
 
 
     public boolean isMoveLegal(int rowDest, int colDest) {
+        if (chessBoard.verifySourceAndDestination(row, col, rowDest, colDest, isBlack)) {
+            return chessBoard.verifyDiagonal(row, col, rowDest, colDest);
+        }
         return false;
     }
 
