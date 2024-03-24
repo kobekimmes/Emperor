@@ -5,7 +5,8 @@ class Board {
     Piece[][] pieceArray;
 
     Board() {
-        Fen.load(this, "");
+        pieceArray = new Piece[8][8];
+        Fen.load(this, "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
     }
 
     void setPiece(int row, int col, Piece p) {

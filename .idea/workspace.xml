@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3ec2164-b8c7-4c86-b285-b39b22c0576c" name="Changes" comment="" />
+    <list default="true" id="a3ec2164-b8c7-4c86-b285-b39b22c0576c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/media/pieces/black-bishop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/media/pieces/black-king.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/media/pieces/black-knight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/media/pieces/black-pawn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/media/pieces/black-queen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/media/pieces/black-rook.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/media/pieces/white-bishop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/media/pieces/white-king.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/media/pieces/white-knight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/media/pieces/white-pawn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/media/pieces/white-queen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/media/pieces/white-rook.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kobekimmes/com/emperor/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kobekimmes/com/emperor/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kobekimmes/com/emperor/Chess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kobekimmes/com/emperor/Chess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kobekimmes/com/emperor/Fen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kobekimmes/com/emperor/Fen.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,8 +66,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/kobekimmes/com/emperor" />
-      <recent name="$PROJECT_DIR$/src/main/java" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/media" />
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="SharedIndexes">

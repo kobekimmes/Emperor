@@ -17,27 +17,27 @@ class Fen {
                     break;
                 case 'p':
                 case 'P':
-                    b.setPiece(row, col, new Pawn(b, row, col++, currPiece != 'p'));
+                    b.setPiece(row, col, new Pawn(b, row, col++, currPiece != 'P'));
                     break;
                 case 'k':
                 case 'K':
-                    b.setPiece(row, col, new King(b, row, col++, currPiece != 'k'));
+                    b.setPiece(row, col, new King(b, row, col++, currPiece != 'K'));
                     break;
                 case 'q':
                 case 'Q':
-                    b.setPiece(row, col, new Queen(b, row, col++, currPiece != 'q'));
+                    b.setPiece(row, col, new Queen(b, row, col++, currPiece != 'Q'));
                     break;
                 case 'r':
                 case 'R':
-                    b.setPiece(row, col, new Rook(b, row, col++, currPiece != 'r'));
+                    b.setPiece(row, col, new Rook(b, row, col++, currPiece != 'R'));
                     break;
                 case 'b':
                 case 'B':
-                    b.setPiece(row, col, new Bishop(b, row, col++, currPiece != 'b'));
+                    b.setPiece(row, col, new Bishop(b, row, col++, currPiece != 'B'));
                     break;
                 case 'n':
                 case 'N':
-                    b.setPiece(row, col, new Knight(b, row, col++, currPiece != 'n'));
+                    b.setPiece(row, col, new Knight(b, row, col++, currPiece != 'N'));
                     break;
                 default:
                     if (Character.isDigit(currPiece)) {
