@@ -1,79 +1,97 @@
 package kobekimmes.com.emperor;
+import java.util.ArrayList;
+
+import javafx.geometry.Pos;
 
 class Board {
 
     Piece[][] pieceArray;
 
+    ArrayList<Piece> whitePieces;
+    ArrayList<Piece> blackPieces;
+
     Board() {
         pieceArray = new Piece[8][8];
+        whitePieces = new ArrayList<>();
+        blackPieces = new ArrayList<>();
         Fen.load(this, "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
     }
 
-    void setPiece(int row, int col, Piece p) {
-        if ((-1 < row && row < pieceArray.length) && (-1 < col && col < pieceArray.length) && (p != null)) {
-            pieceArray[row][col] = p;
+    void setPiece(Position pos, Piece p) {
+        if ((-1 < pos.row && pos.row < pieceArray.length) && (-1 < pos.col && pos.col < pieceArray.length) && (p != null)) {
+            pieceArray[pos.row][pos.col] = p;
+            if (p.isBlack) {
+                blackPieces.add(p);
+            }
+            else {
+                whitePieces.add(p);
+            }
         }
         else {
-            System.err.println("Board.setPiece(): Invalid bounds entered or attempting to add null object");
+            System.out.println("Board.setPiece(): Invalid bounds entered or attempting to add null object");
         }
     }
 
-    Piece getPiece(int row, int col) {
-        if ((-1 < row && row < pieceArray.length) && (-1 < col && col < pieceArray.length)) {
-            return pieceArray[row][col];
+    Piece getPiece(Position pos) {
+        if ((-1 < pos.row && pos.row < pieceArray.length) && (-1 < pos.col && pos.col < pieceArray.length)) {
+            return pieceArray[pos.row][pos.col];
         }
         else {
-            System.err.println("Board.getPiece(): Invalid bounds entered");
+            System.out.println("Board.getPiece(): Invalid bounds entered");
             return null;
         }
     }
 
-    void removePiece(int row, int col) {
-        if ((-1 < row && row < pieceArray.length) && (-1 < col && col < pieceArray.length)) {
-            pieceArray[row][col] = null;
+    void removePiece(Position pos) {
+        if ((-1 < pos.row && pos.row < pieceArray.length) && (-1 < pos.col && pos.col < pieceArray.length)) {
+            Piece pieceToRemove = pieceArray[pos.row][pos.col];
+            if (pieceToRemove != null) {
+                if (pieceToRemove.isBlack) {
+                    blackPieces.remove(pieceToRemove);
+                }
+                else{
+                    whitePieces.remove(pieceToRemove);
+                }
+            }
+            pieceArray[pos.row][pos.col] = null;
         }
     }
 
-    boolean checkBounds(int sr, int sc, int er, int ec) {
-        return ((sr > -1 && sr < 8)  && (sc > -1 && sc < 8) && (er > -1 && er < 8) && (ec > -1 && ec < 8));
+    boolean checkBounds(Position from, Position to) {
+        return ((from.row > -1 && from.row < 8)  && (from.col > -1 && from.col < 8) &&
+                (to.row > -1 && to.row < 8) && (to.col > -1 && to.col < 8));
     }
 
-
-    void renderBoard() {
-
-    }
-
-    boolean verifySourceAndDestination(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
-        if (!checkBounds(startRow, startCol, endRow, endCol)) {
+    boolean verifySourceAndDestination(Position from, Position to, boolean isBlack) {
+        if (!checkBounds(from, to)) {
             return false;
         }
 
-        Piece startPiece = this.getPiece(startRow, startCol);
+        Piece startPiece = this.getPiece(from);
         if (startPiece != null) {
-            Piece endPiece = this.getPiece(endRow, endCol);
+            Piece endPiece = this.getPiece(to);
             return (startPiece.isBlack == isBlack && (endPiece == null || endPiece.isBlack != isBlack));
         }
-        System.err.println("Board.verifySourceAndDestination(): Invalid bounds entered or piece does not exist");
         return false;
     }
 
-    boolean verifyDiagonal(int startRow, int startCol, int endRow, int endCol) {
-        if (!checkBounds(startRow, startCol, endRow, endCol)) {
+    boolean verifyDiagonal(Position from, Position to) {
+        if (!checkBounds(from, to)) {
             return false;
         }
 
-        int rise = Math.abs(endRow - startRow);
-        int run = Math.abs(endCol - startCol);
+        int rise = Math.abs(to.row - from.row);
+        int run = Math.abs(to.col - from.col);
 
         if (rise != run) {
             return false;
         }
 
-        int xDir = startRow > endRow ? -1 : 1;
-        int yDir = startCol > endCol ? -1 : 1;
+        int xDir = from.row > to.row ? -1 : 1;
+        int yDir = from.col > to.col ? -1 : 1;
 
         for (int i = 1; i < rise; i++) {
-            if (pieceArray[(i*xDir)+startRow][(i*yDir)+startCol] != null) {
+            if (pieceArray[(i*xDir)+from.row][(i*yDir)+from.col] != null) {
                 return false;
             }
         }
@@ -81,20 +99,20 @@ class Board {
 
     }
 
-    boolean verifyHorizontal(int startRow, int startCol, int endRow, int endCol) {
-        if (!checkBounds(startRow, startCol, endRow, endCol)) {
+    boolean verifyHorizontal(Position from, Position to) {
+        if (!checkBounds(from, to)) {
             return false;
         }
 
-        if (startRow != endRow) {
+        if (from.row != to.row) {
             return false;
         }
 
-        int start = Math.min(startCol, endCol)+1;
-        int stop = Math.max(startCol, endCol)-1;
+        int start = Math.min(from.col, to.col)+1;
+        int stop = Math.max(from.col, to.col);
 
-        for (int i = start; i < stop; i++) {
-            if (pieceArray[startRow][i + start] != null) {
+        for (int i = 1; i < stop - start; i++) {
+            if (pieceArray[from.row][i + start] != null) {
                 return false;
             }
         }
@@ -102,20 +120,20 @@ class Board {
         return true;
     }
 
-    boolean verifyVertical(int startRow, int startCol, int endRow, int endCol) {
-        if (!checkBounds(startRow, startCol, endRow, endCol)) {
+    boolean verifyVertical(Position from, Position to) {
+        if (!checkBounds(from, to)) {
             return false;
         }
 
-        if (startCol != endCol) {
+        if (from.col != to.col) {
             return false;
         }
 
-        int start = Math.min(startRow, endRow)+1;
-        int stop = Math.max(startRow, endRow)-1;
+        int start = Math.min(from.row, to.row)+1;
+        int stop = Math.max(from.row, to.row);
 
-        for (int i = start; i < stop; i++) {
-            if (pieceArray[i + start][startCol] != null) {
+        for (int i = 1; i < stop-start; i++) {
+            if (pieceArray[start+i][from.col] != null) {
                 return false;
             }
         }
@@ -124,12 +142,12 @@ class Board {
     }
 
 
-    boolean verifyAdjacent(int startRow, int startCol, int endRow, int endCol) {
-        if (!checkBounds(startRow, startCol, endRow, endCol)) {
+    boolean verifyAdjacent(Position from, Position to) {
+        if (!checkBounds(from, to)) {
             return false;
         }
 
-        return Math.abs(endCol - startCol) <= 1 && Math.abs(endRow - startRow) <= 1;
+        return Math.abs(to.col - from.col) <= 1 && Math.abs(to.row - from.row) <= 1;
 
     }
 

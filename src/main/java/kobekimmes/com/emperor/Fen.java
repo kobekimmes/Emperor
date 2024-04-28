@@ -6,6 +6,8 @@ class Fen {
 
         int row = 0, col = 0;
         char currPiece;
+        boolean isBlack;
+        Piece newPiece;
 
         for (int i = 0; i < pieces.length(); i++) {
             currPiece = pieces.charAt(i);
@@ -17,27 +19,69 @@ class Fen {
                     break;
                 case 'p':
                 case 'P':
-                    b.setPiece(row, col, new Pawn(b, row, col++, currPiece != 'P'));
+                    isBlack = currPiece != 'P';
+                    newPiece = new Pawn(b, row, col, isBlack);
+                    b.setPiece(new Position(row, col++), newPiece);
+//                    if (isBlack) {
+//                        b.blackPieces.add(newPiece);
+//                    } else {
+//                        b.whitePieces.add(newPiece);
+//                    }
                     break;
                 case 'k':
                 case 'K':
-                    b.setPiece(row, col, new King(b, row, col++, currPiece != 'K'));
+                    isBlack = currPiece != 'K';
+                    newPiece = new King(b, row, col, isBlack);
+                    b.setPiece(new Position(row, col++), newPiece);
+//                    if (isBlack) {
+//                        b.blackPieces.add(newPiece);
+//                    } else {
+//                        b.whitePieces.add(newPiece);
+//                    }
                     break;
                 case 'q':
                 case 'Q':
-                    b.setPiece(row, col, new Queen(b, row, col++, currPiece != 'Q'));
+                    isBlack = currPiece != 'Q';
+                    newPiece = new Queen(b, row, col, isBlack);
+                    b.setPiece(new Position(row, col++), newPiece);
+//                    if (isBlack) {
+//                        b.blackPieces.add(newPiece);
+//                    } else {
+//                        b.whitePieces.add(newPiece);
+//                    }
                     break;
                 case 'r':
                 case 'R':
-                    b.setPiece(row, col, new Rook(b, row, col++, currPiece != 'R'));
+                    isBlack = currPiece != 'R';
+                    newPiece = new Rook(b, row, col, isBlack);
+                    b.setPiece(new Position(row, col++), newPiece);
+//                    if (isBlack) {
+//                        b.blackPieces.add(newPiece);
+//                    } else {
+//                        b.whitePieces.add(newPiece);
+//                    }
                     break;
                 case 'b':
                 case 'B':
-                    b.setPiece(row, col, new Bishop(b, row, col++, currPiece != 'B'));
+                    isBlack = currPiece != 'B';
+                    newPiece = new Bishop(b, row, col, isBlack);
+                    b.setPiece(new Position(row, col++), newPiece);
+//                    if (isBlack) {
+//                        b.blackPieces.add(newPiece);
+//                    } else {
+//                        b.whitePieces.add(newPiece);
+//                    }
                     break;
                 case 'n':
                 case 'N':
-                    b.setPiece(row, col, new Knight(b, row, col++, currPiece != 'N'));
+                    isBlack = currPiece != 'N';
+                    newPiece = new Knight(b, row, col, isBlack);
+                    b.setPiece(new Position(row, col++), newPiece);
+//                    if (isBlack) {
+//                        b.blackPieces.add(newPiece);
+//                    } else {
+//                        b.whitePieces.add(newPiece);
+//                    }
                     break;
                 default:
                     if (Character.isDigit(currPiece)) {

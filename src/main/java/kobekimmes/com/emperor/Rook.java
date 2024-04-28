@@ -3,16 +3,15 @@ package kobekimmes.com.emperor;
 class Rook extends Piece {
 
     Rook(Board _b, int _row, int _col, boolean _isBlack) {
-        row = _row;
-        col = _col;
+        pos = new Position(_row, _col);
         isBlack = _isBlack;
         chessBoard = _b;
     }
 
 
-    public boolean isMoveLegal(int rowDest, int colDest) {
-        if (chessBoard.verifySourceAndDestination(row, col, rowDest, colDest, isBlack)) {
-            return chessBoard.verifyHorizontal(row, col, rowDest, colDest) || chessBoard.verifyVertical(row, col, rowDest, colDest);
+    public boolean isMoveLegal(Position newPos) {
+        if (chessBoard.verifySourceAndDestination(pos, newPos, isBlack)) {
+            return chessBoard.verifyHorizontal(pos, newPos) || chessBoard.verifyVertical(pos, newPos);
         }
         return false;
     }
